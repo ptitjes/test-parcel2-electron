@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "preserveSymlinks": true,
+    "declaration": true,
+    "inlineSourceMap": true,
+    "outDir": "dist",
+    "noEmit": false,
+    "lib": ["DOM", "ESNext", "ES2019"],
+    "jsx": "react"
+  }
+}

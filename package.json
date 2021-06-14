@@ -1,0 +1,60 @@
+{
+  "name": "test-parcel2-electron",
+  "version": "0.0.0",
+  "description": "Test Parcel 2.0.0 with Electron.",
+  "license": "UNLICENSED",
+  "main": "build/main/index.js",
+  "preload": "build/preload/index.js",
+  "renderer": "build/renderer/index.html",
+  "scripts": {
+    "build:main": "parcel build src/main/index.ts --target main --dist-dir build/main --public-url /build",
+    "build:preload": "parcel build src/preload/index.ts --target preload --dist-dir build/preload --public-url /build",
+    "build:renderer": "parcel build src/renderer/index.html --target renderer --dist-dir build/renderer --public-url ./",
+    "build:bundle": "run-s build:main build:preload build:renderer",
+    "build": "run-s build:bundle",
+    "dev:main": "parcel watch src/main/index.ts --target main --dist-dir build/main --public-url /build --hmr-port 4001",
+    "dev:preload": "parcel watch src/preload/index.ts --target preload --dist-dir build/preload --public-url /build --hmr-port 4002",
+    "dev:renderer": "parcel serve -p 3000 src/renderer/index.html --target renderer --dist-dir build/renderer --hmr-port 4003",
+    "dev:bundle": "run-p -l dev:main dev:preload dev:renderer",
+    "dev:wait": "wait-on ./build/main/index.js && wait-on http://localhost:3000",
+    "dev:electron": "yarn dev:wait && electron .",
+    "dev": "run-p dev:bundle dev:electron"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electron": "10.4.7",
+    "npm-run-all": "^4.1.5",
+    "parcel": "2.0.0-nightly.792",
+    "wait-on": "^5.0.1"
+  },
+  "targets": {
+    "main": {
+      "context": "electron-main",
+      "engines": {
+        "electron": ">=10.x"
+      },
+      "includeNodeModules": {
+        "electron": false
+      }
+    },
+    "preload": {
+      "context": "electron-renderer",
+      "engines": {
+        "electron": ">=10.x"
+      },
+      "includeNodeModules": {
+        "electron": false
+      }
+    },
+    "renderer": {
+      "context": "electron-renderer",
+      "engines": {
+        "electron": ">=10.x"
+      },
+      "includeNodeModules": {
+        "electron": false
+      }
+    }
+  }
+}
