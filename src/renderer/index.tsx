@@ -1,11 +1,13 @@
 import './styles';
 
 import '@rmwc/button/styles';
+import '@rmwc/textfield/styles';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {Button} from '@rmwc/button';
+import {TextField} from '@rmwc/textfield';
 
 import {Test} from '../shared/test';
 
@@ -22,10 +24,12 @@ export function start(): void {
 }
 
 function App() {
-  return (<>
+  return (
+    <>
       <Button raised>
-        Test
+        Test Button
       </Button>
+      <TextField label="Test TextField"/>
       <div className="test">Local stylesheet</div>
     </>
   );
