@@ -1,9 +1,11 @@
 import path from 'path';
 
-import { app, BrowserWindow } from 'electron';
-import { format } from 'url';
+import {app, BrowserWindow} from 'electron';
+import {format} from 'url';
 
 let mainWindow: BrowserWindow | undefined;
+
+const PROD = process.env.MODE === 'prod' ?? app.isPackaged
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
@@ -17,7 +19,7 @@ app.on('ready', async () => {
     },
   });
 
-  if (!app.isPackaged) {
+  if (!PROD) {
     await mainWindow.loadURL('http://localhost:3000');
   } else {
     await mainWindow.loadURL(
